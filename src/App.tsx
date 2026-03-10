@@ -14,7 +14,7 @@ function App() {
       <Player />
       <div id="challenges">
         {cards.map((card, index) => (
-          <TimerChallangeCard key={card.time} time={card.time} text={card.text} />
+          <TimerChallangeCard key={card.time} targetTime={card.time} text={card.text} />
         ))}
       </div>
     </>
