@@ -1,29 +1,30 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface TimerChallangeCardProps {
   targetTime: number
   text: string
 }
 
-let clickTime: number | null = null
+// let clickTime: number | null = null // One variable for all instances of the component = bug if multiple timers are used at the same time.
 
 const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
   const [isTimer, setIsTimer] = useState(false)
+  const clickTime = useRef<number | null>(null)
 
   const toggleTimer = () => {
     if (isTimer) {
-      const msBetweenClicks = Date.now() - clickTime!
+      const msBetweenClicks = Date.now() - (clickTime.current || 0)
       const elapsed = msBetweenClicks - targetTime
 
-      const text = `You were ${Math.abs(elapsed) / 1000} seconds ${elapsed > 0 ? 'late' : 'early'}!`
+      const alertText = `You were ${Math.abs(elapsed) / 1000} seconds ${elapsed > 0 ? 'late' : 'early'}!`
 
-      alert(text)
+      alert(alertText)
 
-      clickTime = null
+      clickTime.current = null
 
       setIsTimer(false)
     } else {
-      clickTime = Date.now()
+      clickTime.current = Date.now()
 
       setIsTimer(true)
     }
