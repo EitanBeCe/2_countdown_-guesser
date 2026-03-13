@@ -1,5 +1,5 @@
-import { use, useRef, useState } from 'react'
-import ResultPopup from './ResultPopup.js'
+import { useRef, useState } from 'react'
+import ResultPopup, { type ResultPopupHandle } from './ResultPopup.js'
 
 interface TimerChallangeCardProps {
   targetTime: number
@@ -13,7 +13,7 @@ const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
   // const [isShowPopup, setIsShowPopup] = useState(false)
   const clickTime = useRef<number | null>(null)
   const alertText = useRef('')
-  const popupRef = useRef<HTMLDialogElement>(null)
+  const popupRef = useRef<ResultPopupHandle | null>(null)
 
   const toggleTimer = () => {
     if (isTimer) {
@@ -31,8 +31,8 @@ const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
 
       setIsTimer(false)
 
-      popupRef.current?.showModal()
-      // setIsShowPopup(true)
+      // popupRef.current?.showModal()
+      popupRef.current?.openModal() // useImperativeHandle
     } else {
       // Start timer
       clickTime.current = Date.now()

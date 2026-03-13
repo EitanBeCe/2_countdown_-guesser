@@ -6,6 +6,7 @@ The app is mainly a practice project for:
 
 - `useRef` for mutable values that should not trigger re-renders
 - React portals (`createPortal`) for rendering a modal outside the main tree
+- `useImperativeHandle`
 - TypeScript in React components
 
 ## How It Works

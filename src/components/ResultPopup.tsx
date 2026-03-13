@@ -1,14 +1,26 @@
+import { Ref, useImperativeHandle, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
+export interface ResultPopupHandle {
+  openModal: () => void
+}
+
 interface ResultPopupProps {
-  ref: React.RefObject<HTMLDialogElement | null>
+  ref: Ref<ResultPopupHandle>
   text: string
-  // onClose: () => void
 }
 
 const ResultPopup = ({ ref, text }: ResultPopupProps) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null)
+
+  useImperativeHandle(ref, () => ({
+    openModal() {
+      dialogRef.current?.showModal()
+    },
+  }))
+
   return createPortal(
-    <dialog ref={ref} className="result-modal">
+    <dialog ref={dialogRef} className="result-modal">
       <h2>Result</h2>
       <p>{text}</p>
       <form method="dialog">
