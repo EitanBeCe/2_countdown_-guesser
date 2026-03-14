@@ -2,13 +2,13 @@ import { useRef, useState } from 'react'
 import ResultPopup, { ResultModalHandle } from './ResultPopup.js'
 
 interface TimerChallangeCardProps {
-  targetTime: number
+  targetTimeMs: number
   text: string
 }
 
 // let clickTime: number | null = null // One variable for all instances of the component = bug if multiple timers are used at the same time.
 
-const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
+const TimerChallangeCard = ({ targetTimeMs, text }: TimerChallangeCardProps) => {
   const [isTimer, setIsTimer] = useState(false)
   // const [isShowPopup, setIsShowPopup] = useState(false)
   const clickTime = useRef<number | null>(null)
@@ -19,13 +19,15 @@ const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
     if (isTimer) {
       // Stop timer and show result
       const msBetweenClicks = Date.now() - (clickTime.current || 0)
-      const elapsed = msBetweenClicks - targetTime
+      const elapsed = msBetweenClicks - targetTimeMs
+      // const score = Math.round((msBetweenClicks / targetTimeMs) * 100)
 
-      const second_s = targetTime / 1000 === 1 ? 'second' : 'seconds'
+      const second_s = targetTimeMs / 1000 === 1 ? 'second' : 'seconds'
 
-      alertText.current = `The target time was ${targetTime / 1000} ${second_s}.
+      alertText.current = `The target time was ${targetTimeMs / 1000} ${second_s}.
       ${msBetweenClicks / 1000} ${second_s} passed.
       You were ${Math.abs(elapsed) / 1000} ${second_s} ${elapsed > 0 ? 'late' : 'early'}!`
+      // Your SCORE is: ${score}`
 
       clickTime.current = null
 
@@ -52,7 +54,7 @@ const TimerChallangeCard = ({ targetTime, text }: TimerChallangeCardProps) => {
 
       <section className="challenge">
         <h2>{text}</h2>
-        <div className="challenge-time">{targetTime / 1000} seconds</div>
+        <div className="challenge-time">{targetTimeMs / 1000} seconds</div>
 
         <button onClick={toggleTimer}>{isTimer ? 'Timer Started!' : 'Start Timer'}</button>
       </section>
