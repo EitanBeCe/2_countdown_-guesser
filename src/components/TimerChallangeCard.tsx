@@ -6,7 +6,7 @@ interface TimerChallangeCardProps {
   text: string
 }
 
-// let clickTime: number | null = null // One variable for all instances of the component = bug if multiple timers are used at the same time.
+// let clickTime: number | null = null // One variable for all instances of the component === bug if multiple timers are used at the same time.
 
 const TimerChallangeCard = ({ targetTimeMs, text }: TimerChallangeCardProps) => {
   const [isTimer, setIsTimer] = useState(false)

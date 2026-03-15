@@ -9,6 +9,14 @@ The app is mainly a practice project for:
 - `useImperativeHandle`
 - TypeScript in React components
 
+### Main Screen
+
+![Main screen](./public/main_screenshot.png)
+
+### Result Popup
+
+![Result popup](./public/popup_screenshot.png)
+
 ## How It Works
 
 1. Choose one of the challenge cards (`1s`, `5s`, `10s`, `15s`).
