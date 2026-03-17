@@ -1,4 +1,4 @@
-import { Ref, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 export default function Player() {
   const inputRef = useRef<HTMLInputElement>(null)
